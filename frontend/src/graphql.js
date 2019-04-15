@@ -9,3 +9,16 @@ export const CHATS_QUERY = gql`
     }
   }
 `
+
+export const SEND_MESSAGE_MUTATION = gql`
+mutation SendMessageMutation($from: String!, $message: String!) {
+  sendMessage(
+    from: $from,
+    message: $message
+  ) {
+    id
+    from
+    message
+  }
+}
+`

@@ -17,6 +17,13 @@
                       <dd>{{ chat.message }}</dd>
                     </dl>
                     <hr>
+                    <input
+                      type='text'
+                      class="form-control"
+                      placeholder="Type your message..."
+                      v-model="message"
+                      @keyup.enter="sendMessage"
+                    >
                   </div>
                 </div>
               </div>
@@ -48,7 +55,7 @@
 </template>
 
 <script>
-import { CHATS_QUERY } from '@/graphql';
+import { CHATS_QUERY, SEND_MESSAGE_MUTATION } from '@/graphql';
 export default {
   name: 'app',
   data() {
@@ -61,6 +68,17 @@ export default {
   methods: {
     enterChat() {
       this.entered = !!this.username != '';
+    },
+    async sendMessage() {
+      const message = this.message;
+      this.message = '';
+      await this.$apollo.mutate({
+        mutation: SEND_MESSAGE_MUTATION,
+        variables: {
+          from: this.username,
+          message,
+        },
+      });
     },
   },
   apollo: {
