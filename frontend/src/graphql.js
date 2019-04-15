@@ -22,3 +22,13 @@ mutation SendMessageMutation($from: String!, $message: String!) {
   }
 }
 `
+
+export const MESSAGE_SENT_SUBSCRIPTION = gql`
+subscription MessageSentSubscription {
+  messageSent {
+    id
+    from
+    message
+  }
+}
+`

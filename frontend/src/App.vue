@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import { CHATS_QUERY, SEND_MESSAGE_MUTATION } from '@/graphql';
+import { CHATS_QUERY, SEND_MESSAGE_MUTATION, MESSAGE_SENT_SUBSCRIPTION, } from '@/graphql';
 export default {
   name: 'app',
   data() {
@@ -84,6 +84,14 @@ export default {
   apollo: {
     chats: {
       query: CHATS_QUERY,
+      subscribeToMore: {
+        document: MESSAGE_SENT_SUBSCRIPTION,
+        updateQuery: (previousData, { subscriptionData }) => {
+          return {
+            chats: [...previousData.chats, subscriptionData.data.messageSent],
+          };
+        },
+      },
     },
   },
 };
