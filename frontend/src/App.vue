@@ -9,7 +9,14 @@
                 <div class="card">
                   <div class="card-header">Chatbox</div>
                   <div class="card-body">
-                    <!-- messages will be here -->
+                    <dl
+                      v-for="(chat, id) in chats"
+                      :key="id"
+                    >
+                      <dt>{{ chat.from }}</dt>
+                      <dd>{{ chat.message }}</dd>
+                    </dl>
+                    <hr>
                   </div>
                 </div>
               </div>
@@ -41,6 +48,7 @@
 </template>
 
 <script>
+import { CHATS_QUERY } from '@/graphql';
 export default {
   name: 'app',
   data() {
@@ -53,6 +61,11 @@ export default {
   methods: {
     enterChat() {
       this.entered = !!this.username != '';
+    },
+  },
+  apollo: {
+    chats: {
+      query: CHATS_QUERY,
     },
   },
 };
