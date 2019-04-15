@@ -52,3 +52,5 @@ module.exports = {
 };
 ----
 
+* 下記ファイル内の `localhost` をプライベート IP (xxx.xxx.xxx.xxx) に置き換える。http と ws の 2 ヶ所。
+** frontend/src/main.js
