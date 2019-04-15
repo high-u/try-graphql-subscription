@@ -39,3 +39,16 @@ npm run serve
 
 http://localhost:8080/
 
+=== 上記の動作方法で、プライベートIPにて接続させ、正常に動作させるには、ひと手間必要
+
+* 下記ファイルを作成する。
+** frontend/vue.config.js
+
+----
+module.exports = {
+  devServer: {
+    host: "xxx.xxx.xxx.xxx"
+  }
+};
+----
+
